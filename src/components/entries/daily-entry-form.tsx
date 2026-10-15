@@ -208,6 +208,28 @@ export function DailyEntryForm({
       }
 
       setFormMessage({ tone: "success", text: result.message });
+
+      if (mode === "create") {
+        setEntryDate(defaultDate);
+        setTotalEarnings("");
+        setTotalKm("");
+        setPetrolAmount("");
+        setNotes("");
+        setRows([
+          {
+            key: `row-${Date.now()}`,
+            categoryId: "",
+            amount: "",
+            description: "",
+          },
+        ]);
+        setFieldErrors({});
+        setDuplicateEntryId(null);
+        setConfirmDelete(false);
+        router.refresh();
+        return;
+      }
+
       router.replace(`/entries/${result.entryId}`);
       router.refresh();
     });
